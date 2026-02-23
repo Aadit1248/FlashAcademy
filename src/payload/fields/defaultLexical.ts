@@ -1,0 +1,38 @@
+import {
+  AlignFeature,
+  BlockquoteFeature,
+  BoldFeature,
+  FixedToolbarFeature,
+  HeadingFeature,
+  HorizontalRuleFeature,
+  IndentFeature,
+  ItalicFeature,
+  lexicalEditor,
+  LinkFeature,
+  OrderedListFeature,
+  ParagraphFeature,
+  StrikethroughFeature,
+  UnderlineFeature,
+  UnorderedListFeature,
+  UploadFeature,
+} from '@payloadcms/richtext-lexical';
+
+export const defaultLexical = lexicalEditor({
+  features: [
+    BoldFeature(),
+    ItalicFeature(),
+    UnderlineFeature(),
+    StrikethroughFeature(),
+    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }),
+    LinkFeature(),
+    OrderedListFeature(),
+    UnorderedListFeature(),
+    BlockquoteFeature(),
+    ParagraphFeature(),
+    AlignFeature(),
+    IndentFeature(),
+    FixedToolbarFeature(),
+    HorizontalRuleFeature(),
+    UploadFeature(),
+  ],
+});
