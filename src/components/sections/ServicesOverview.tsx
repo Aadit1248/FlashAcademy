@@ -112,7 +112,7 @@ function ServiceCard({ service }: { service: Service }) {
         </div>
 
         {/* CTA */}
-        <Button variant="secondary" className="w-full" href="/book">
+        <Button variant="secondary" className="w-full" href="#book-court">
           Book Now
         </Button>
       </CardContent>
