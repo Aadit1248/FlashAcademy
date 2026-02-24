@@ -1,4 +1,5 @@
-import { Users } from '@/payload/collections';
+import { Users, Locations, Services, Players, Events, BookedSlots } from '@/payload/collections';
+import { SystemConfig } from '@/payload/globals';
 import { defaultLexical } from '@/payload/fields/defaultLexical';
 import { postgresAdapter } from '@payloadcms/db-postgres';
 import path from 'path';
@@ -16,7 +17,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users],
+  collections: [Users, Locations, Services, Players, Events, BookedSlots],
+  globals: [SystemConfig],
   editor: defaultLexical,
   db: postgresAdapter({
     pool: {

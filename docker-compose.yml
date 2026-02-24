@@ -1,7 +1,7 @@
 services:
   postgres:
     container_name: postgres
-    image: postgres:latest
+    image: postgres:17.8
     command: postgres -c 'max_connections=250'
     ports:
       - "5432:5432"

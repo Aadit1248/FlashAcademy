@@ -26,3 +26,8 @@ You are an expert architect specializing in Payload CMS (v3+), Next.js (App Rout
 2. **Context Awareness:** Always check `@workspace` to ensure new components align with existing patterns.
 3. **Refactor First:** If a request would create duplicate logic, suggest a refactor of the existing code instead of adding a new snippet.
 4. **Dry Run:** If I ask for a complex feature, provide the "Folder Structure" view first to confirm we agree on where files should live.
+
+## 🎾 Flash Sports Academy Business Rules
+- **Pricing:** Adults are NPR 12,000/month (morning); Kids are NPR 1,000/hour (evening).
+- **Locations:** Baluwatar (2 clay, 1 mini) and Budhanilkantha (4 clay).
+- **Calculation:** Always calculate Player age on the server using `afterRead` hooks from their `date_of_birth`.
