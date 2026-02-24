@@ -131,8 +131,41 @@ export async function createLocation(data: Record<string, unknown>) {
   return createDocument('locations', data);
 }
 
-export async function getLocations(options?: { limit?: number; page?: number }) {
+export async function getLocations(options?: { 
+  limit?: number; 
+  page?: number;
+  where?: Record<string, unknown>;
+  sort?: string;
+}) {
   return getDocuments('locations', options);
+}
+
+export async function searchLocations(searchTerm: string, options?: {
+  limit?: number;
+  page?: number;
+}) {
+  return getDocuments('locations', {
+    ...options,
+    where: {
+      name: {
+        contains: searchTerm,
+      },
+    },
+  });
+}
+
+export async function getLocationsByCourtType(courtType: 'clay' | 'mini', options?: {
+  limit?: number;
+  page?: number;
+}) {
+  const whereClause = courtType === 'clay' 
+    ? { clayCourts: { greater_than: 0 } }
+    : { miniCourts: { greater_than: 0 } };
+  
+  return getDocuments('locations', {
+    ...options,
+    where: whereClause,
+  });
 }
 
 export async function getLocationById(id: string) {
@@ -215,8 +248,55 @@ export async function createBookedSlot(data: Record<string, unknown>) {
   return createDocument('booked-slots', data);
 }
 
-export async function getBookedSlots(options?: { limit?: number; page?: number }) {
-  return getDocuments('booked-slots', options);
+export async function getBookedSlots(options?: { 
+  limit?: number; 
+  page?: number;
+  where?: Record<string, unknown>;
+  sort?: string;
+}) {
+  return getDocuments('booked-slots', {
+    ...options,
+    sort: options?.sort || '-startTime',
+  });
+}
+
+export async function getBookedSlotsByLocation(locationId: string, options?: {
+  limit?: number;
+  page?: number;
+}) {
+  return getDocuments('booked-slots', {
+    ...options,
+    where: {
+      location: {
+        equals: locationId,
+      },
+    },
+    sort: '-startTime',
+  });
+}
+
+export async function getUpcomingSlots(options?: {
+  limit?: number;
+  page?: number;
+  locationId?: string;
+}) {
+  const now = new Date().toISOString();
+  const whereClause: Record<string, unknown> = {
+    startTime: {
+      greater_than: now,
+    },
+  };
+  
+  if (options?.locationId) {
+    whereClause.location = { equals: options.locationId };
+  }
+  
+  return getDocuments('booked-slots', {
+    limit: options?.limit,
+    page: options?.page,
+    where: whereClause,
+    sort: 'startTime',
+  });
 }
 
 export async function getBookedSlotById(id: string) {

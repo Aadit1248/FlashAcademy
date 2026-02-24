@@ -1,6 +1,8 @@
 import { Hero } from "@/components/sections/Hero";
+import { ServicesOverview } from "@/components/sections/ServicesOverview";
 import { FindVenue } from "@/components/sections/FindVenue";
 import { TrendingVenues } from "@/components/sections/TrendingVenues";
+import { Players } from "@/components/sections/Players";
 import { SportCategories } from "@/components/sections/SportCategories";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Pricing } from "@/components/sections/Pricing";
@@ -11,7 +13,9 @@ export default function HomePage() {
     <>
       <Hero />
       <FindVenue />
+      <ServicesOverview />
       <TrendingVenues />
+      <Players />
       <SportCategories />
       <Pricing />
       <Testimonials />

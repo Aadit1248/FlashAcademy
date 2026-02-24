@@ -17,7 +17,7 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="py-20 bg-green-900 relative overflow-hidden">
+    <section id="testimonials" className="py-20 bg-green-900 relative overflow-hidden scroll-mt-16">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-0 w-96 h-96 bg-yellow-400 rounded-full blur-3xl" />

@@ -1,82 +1,45 @@
-import { Button } from '@/components/ui/Button';
+import { getLocations } from '@/lib/payload';
+import { BookingForm } from './BookingForm';
 
-const sports = ['Tennis', 'Pickleball', 'Badminton', 'Cricket'];
-const locations = ['Baluwatar', 'Budhanilkantha'];
+interface Location {
+  id: string;
+  name: string;
+  clayCourts: number;
+  miniCourts: number;
+}
 
-export function FindVenue() {
+export async function FindVenue() {
+  let locations: Location[] = [];
+
+  try {
+    const locationsData = await getLocations({ limit: 0 });
+    locations = locationsData.docs as Location[];
+  } catch (error) {
+    console.error('Error fetching locations:', error);
+  }
+
   return (
-    <section className="py-16 bg-white -mt-16 relative z-30">
+    <section id="book-court" className="py-16 bg-white -mt-16 relative z-30 scroll-mt-20">
       <div className="container mx-auto px-6">
-        <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-5xl mx-auto border border-gray-100">
-          <h2 className="text-2xl font-bold text-green-900 mb-6">Find Venue</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            {/* Location */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Location
-              </label>
-              <select className="w-full rounded-full border border-gray-200 bg-white px-4 py-3 text-gray-900 focus:border-green-800 focus:outline-none focus:ring-2 focus:ring-green-800/20">
-                <option value="">Select Location</option>
-                {locations.map((location) => (
-                  <option key={location} value={location}>{location}</option>
-                ))}
-              </select>
-            </div>
+        <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10 max-w-5xl mx-auto border border-gray-100 relative overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-[#CCFF00]/10 rounded-full blur-2xl" />
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#1a472a]/5 rounded-full blur-2xl" />
 
-            {/* Sport */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Sport
-              </label>
-              <select className="w-full rounded-full border border-gray-200 bg-white px-4 py-3 text-gray-900 focus:border-green-800 focus:outline-none focus:ring-2 focus:ring-green-800/20">
-                <option value="">Select Sport</option>
-                {sports.map((sport) => (
-                  <option key={sport} value={sport}>{sport}</option>
-                ))}
-              </select>
+          {/* Header */}
+          <div className="relative z-10 mb-8">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-10 h-10 bg-[#CCFF00] rounded-xl flex items-center justify-center">
+                <span className="text-xl">🎾</span>
+              </div>
+              <h2 className="text-2xl font-bold text-[#1a472a]">Book Your Court</h2>
             </div>
-
-            {/* Date */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Date
-              </label>
-              <input 
-                type="date" 
-                className="w-full rounded-full border border-gray-200 bg-white px-4 py-3 text-gray-900 focus:border-green-800 focus:outline-none focus:ring-2 focus:ring-green-800/20"
-              />
-            </div>
-
-            {/* Time */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Time
-              </label>
-              <input 
-                type="time" 
-                className="w-full rounded-full border border-gray-200 bg-white px-4 py-3 text-gray-900 focus:border-green-800 focus:outline-none focus:ring-2 focus:ring-green-800/20"
-              />
-            </div>
-
-            {/* Search Button */}
-            <div className="flex items-end">
-              <Button variant="primary" className="w-full flex items-center justify-center gap-2">
-                <SearchIcon className="w-5 h-5" />
-                Search
-              </Button>
-            </div>
+            <p className="text-gray-500 ml-13">Reserve your slot and start playing today!</p>
           </div>
+          
+          <BookingForm locations={locations} />
         </div>
       </div>
     </section>
-  );
-}
-
-function SearchIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-    </svg>
   );
 }
