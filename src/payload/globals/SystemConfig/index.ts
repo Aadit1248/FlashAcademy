@@ -9,8 +9,7 @@ export const SystemConfig: GlobalConfig = {
     {
       name: 'bookFreeLession',
       type: 'text',
-      required: true,
-      dbName: 'book_free_lession',
+      required: true
     },
     {
       type: 'group',

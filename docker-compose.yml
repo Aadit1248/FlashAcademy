@@ -1,6 +1,6 @@
 services:
   postgres:
-    container_name: postgres
+    container_name: postgres-hackathon
     image: postgres:17.8
     command: postgres -c 'max_connections=250'
     ports:
