@@ -1,6 +1,6 @@
-import { Users, Locations, Services, Players, Events, BookedSlots } from '@/payload/collections';
-import { SystemConfig } from '@/payload/globals';
-import { defaultLexical } from '@/payload/fields/defaultLexical';
+import { Users, Locations, Services, Players, Events, BookedSlots } from './collections';
+import { SystemConfig } from './globals';
+import { defaultLexical } from './fields/defaultLexical';
 import { postgresAdapter } from '@payloadcms/db-postgres';
 import path from 'path';
 import { buildConfig } from 'payload';
